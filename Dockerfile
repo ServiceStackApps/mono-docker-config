@@ -6,13 +6,16 @@ MAINTAINER Sergey Zhukov svg@ngs.ru
 WORKDIR "/home"
 RUN mkdir -p hfc-install && cd hfc-install && mkdir -p config
 
+ENV USERHFCPORT 9000
+ENV USERSITE www.test.com
+ENV USERLOCATION /var/www/hello-app
+
 WORKDIR "/home/hfc-install"
 #getting templates
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN sudo apt-get -qqq update && sudo apt-get install -y curl
-RUN curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/nginx-config/hello-app.conf.tpl | sed -e "s/\${SITENAME}/$USERSITE/" -e "s/\${HFCPORT}/$USERHFCPORT/" -e "s/\${SITELOCATION}/$USERLOCATION/" > config/$USERSITE.conf
-RUN curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-config/hfc.config.tpl | sed -e "s/\${SITENAME}/$USERSITE/" -e "s/\${HFCPORT}/$USERHFCPORT/" -e "s/\${SITELOCATION}/$USERLOCATION/" > config/hfc.config
-
+RUN curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/nginx-config/hello-app.conf.tpl -o config/hello-app.conf.tpl
+RUN curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-config/hfc.config.tpl -o config/hfc.config.tpl
 
 RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
@@ -34,3 +37,9 @@ RUN ./autogen.sh --prefix=/usr || true
 RUN ./autogen.sh --prefix=/usr && make && sudo make install
 #RUN cd ..
 
+EXPOSE 80
+
+WORKDIR "/home"
+COPY entrypoint.sh entrypoint.sh
+RUN chmod a+x entrypoint.sh
+ENTRYPOINT "/home/entrypoint.sh"
