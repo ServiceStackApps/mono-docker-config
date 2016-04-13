@@ -69,6 +69,8 @@ Login to your virtual machine using ssh or putty.
 
 To install docker you need to run following command:
 
+    curl -fsSL https://get.docker.com/ | sh
+
 Then you need to build and run docker container
 
     sudo apt-get install git
