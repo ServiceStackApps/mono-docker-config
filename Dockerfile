@@ -38,6 +38,7 @@ RUN ./autogen.sh --prefix=/usr && make && sudo make install
 #RUN cd ..
 
 EXPOSE 80
+VOLUME ["/var/www"]
 
 WORKDIR "/home"
 COPY entrypoint.sh entrypoint.sh
