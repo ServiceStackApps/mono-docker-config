@@ -74,24 +74,26 @@ To install docker you need to run following command:
 Then you need to build and run docker container
 
     sudo apt-get install git
-    git clone https://github.com/ServiceStack/mono-docker-config
+    git clone https://github.com/ServiceStackApps/mono-docker-config
     cd mono-docker-config
-    docker build .
+    sudo docker build .
     
 Now you have got docker image which is ready to run. Place your application into /var/www/hello-app and run the command 
     
-    docker run -d -p 80:80 -e USERSITE=www.yourdomain.com -e USERLOCATION=/var/www/hello-app 74ebe2f4dd21 /bin/bash
+    sudo docker run -d -p 80:80 -e USERSITE=www.yourdomain.com -e USERLOCATION=/var/www/hello-app 92627a6cbee6 /bin/bash
 
-Where `USERSITE` - Domain name of the site you will run, for example `www.yourdomain.com`
-      `USERLOCATION` - Directory where applications is located
-      `74ebe2f4dd21` - Docker image ID created on the previous step
+Where 
+
+- `USERSITE` - Domain name of the site you will run, for example `www.yourdomain.com`
+- `USERLOCATION` - Directory where applications is located
+- `92627a6cbee6` - Docker image ID created on the previous step
 
 After executing the command you will get container ID. 
 
 
 To stop docker container you can run:
 
-    docker stop <container ID>
+    sudo docker stop <container ID>
 
 
 
