@@ -67,11 +67,15 @@ After adding you will see updated list of firewall rules.
 
 Login to your virtual machine using ssh or putty.  
 
+##Install Docker
+
 To install docker you need to run following command:
 
     curl -fsSL https://get.docker.com/ | sh
 
-Place your application into `/var/www/hello-app` and then run docker container
+##Run Docker
+
+Place your application into `/var/www/hello-app` and then run docker image
 
     sudo docker run -d -p 80:80 \
          -e USERSITE=www.yourdomain.com \
@@ -90,15 +94,14 @@ To stop docker container you can run:
 
     sudo docker stop <container ID>
 
-
-### Alternative way. Build Docker images from sources
+### Alternative way. Build docker image from sources
 
     sudo apt-get install git
     git clone https://github.com/ServiceStackApps/mono-docker-config
     cd mono-docker-config
     sudo docker build .
     
-Now you have got docker image which is ready to run. Remember ID of docker image. Place your application into /var/www/hello-app and run the command 
+Now you have got docker image which is ready to run. Remember ID of docker image. Place your application into `/var/www/hello-app` and run the command 
     
     sudo docker run -d -p 80:80 \
          -e USERSITE=www.yourdomain.com \
