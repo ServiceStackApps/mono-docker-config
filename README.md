@@ -80,7 +80,11 @@ Then you need to build and run docker container
     
 Now you have got docker image which is ready to run. Place your application into /var/www/hello-app and run the command 
     
-    sudo docker run -d -p 80:80 -e USERSITE=www.yourdomain.com -e USERLOCATION=/var/www/hello-app 92627a6cbee6 /bin/bash
+    sudo docker run -d -p 80:80 \
+         -e USERSITE=www.yourdomain.com \
+         -e USERLOCATION=/var/www/hello-app \
+         -v /var/www:/var/www \
+         92627a6cbee6
 
 Where 
 
