@@ -31,8 +31,8 @@ Place your application into `/var/www/hello-app` and then run docker image
     sudo docker run -d -p 80:80 \
          -e USERSITE=www.yourdomain.com \
          -e USERLOCATION=/var/www/hello-app \
-          -v /var/www:/var/www \
-           xplicit/hyperfastcgi
+         -v /var/www:/var/www \
+         servicestack/hyperfastcgi
 
 Where
 
